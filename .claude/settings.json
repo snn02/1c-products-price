@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "1c-price": {
+      "command": "python",
+      "args": ["-m", "mcp_1c_price"],
+      "env": {
+        "DB_PATH": "C:/!_D/projects/1c-products-price/data/prices.db"
+      }
+    }
+  }
+}

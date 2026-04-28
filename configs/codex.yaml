@@ -1,0 +1,18 @@
+# Добавьте нужный вариант в ~/.codex/config.yaml
+
+# Вариант 1 — если пакет установлен через pip/uv
+mcpServers:
+  1c-price:
+    command: mcp-1c-price
+    env:
+      DB_PATH: /абсолютный/путь/до/1c-products-price/data/prices.db
+
+# Вариант 2 — локальный запуск через uv без глобальной установки
+# mcpServers:
+#   1c-price:
+#     command: uv
+#     args:
+#       - run
+#       - --directory
+#       - /абсолютный/путь/до/1c-products-price
+#       - mcp-1c-price

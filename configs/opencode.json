@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "_comment": "Скопируйте нужный блок mcp в opencode.json вашего проекта",
+
+  "_variant_1_installed": {
+    "description": "Если пакет установлен через pip/uv",
+    "mcp": {
+      "1c-price": {
+        "type": "local",
+        "command": ["mcp-1c-price"],
+        "env": {
+          "DB_PATH": "/абсолютный/путь/до/1c-products-price/data/prices.db"
+        }
+      }
+    }
+  },
+
+  "_variant_2_uv_run": {
+    "description": "Локальный запуск через uv без глобальной установки",
+    "mcp": {
+      "1c-price": {
+        "type": "local",
+        "command": [
+          "uv", "run",
+          "--directory", "/абсолютный/путь/до/1c-products-price",
+          "mcp-1c-price"
+        ]
+      }
+    }
+  }
+}
