@@ -3,20 +3,31 @@
 
   "_comment": "Скопируйте нужный блок mcp в opencode.json вашего проекта",
 
-  "_variant_1_installed": {
-    "description": "Если пакет установлен через pip/uv",
+  "_variant_1_uvx_github": {
+    "description": "Установка прямо из GitHub через uvx (рекомендуется)",
     "mcp": {
       "1c-price": {
         "type": "local",
-        "command": ["mcp-1c-price"],
-        "env": {
-          "DB_PATH": "/абсолютный/путь/до/1c-products-price/data/prices.db"
-        }
+        "command": [
+          "uvx",
+          "--from", "git+https://github.com/snn02/1c-products-price",
+          "mcp-1c-price"
+        ]
       }
     }
   },
 
-  "_variant_2_uv_run": {
+  "_variant_2_installed": {
+    "description": "Если пакет уже установлен через pip/uv install",
+    "mcp": {
+      "1c-price": {
+        "type": "local",
+        "command": ["mcp-1c-price"]
+      }
+    }
+  },
+
+  "_variant_3_uv_run": {
     "description": "Локальный запуск через uv без глобальной установки",
     "mcp": {
       "1c-price": {

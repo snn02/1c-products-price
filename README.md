@@ -26,17 +26,29 @@ AI:
 
 ## Быстрый старт
 
-```bash
-# 1. Установить
-pip install git+https://github.com/snn02/1c-products-price.git
+**1. Прописать сервер в IDE** — `uvx` скачает пакет автоматически. Пример для Claude Code (`.claude/settings.json`):
 
-# 2. Загрузить прайс (~7 900 продуктов)
-mcp-1c-price-update
-
-# 3. Прописать сервер в IDE и работать
+```json
+{
+  "mcpServers": {
+    "1c-price": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/snn02/1c-products-price", "mcp-1c-price"]
+    }
+  }
+}
 ```
 
-Готовые конфиги для каждой IDE — в папке [`configs/`](configs/).
+**2. Загрузить прайс** — один раз после подключения:
+
+```
+обнови прайс
+```
+
+**3. Работать.**
+
+Готовые конфиги для Claude Code, OpenCode и Codex — в папке [`configs/`](configs/).  
+Подробнее — в [руководстве по настройке](docs/configuration.md).
 
 ---
 

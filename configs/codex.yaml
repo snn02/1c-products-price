@@ -1,13 +1,20 @@
 # Добавьте нужный вариант в ~/.codex/config.yaml
 
-# Вариант 1 — если пакет установлен через pip/uv
+# Вариант 1 — установка прямо из GitHub через uvx (рекомендуется)
 mcpServers:
   1c-price:
-    command: mcp-1c-price
-    env:
-      DB_PATH: /абсолютный/путь/до/1c-products-price/data/prices.db
+    command: uvx
+    args:
+      - --from
+      - git+https://github.com/snn02/1c-products-price
+      - mcp-1c-price
 
-# Вариант 2 — локальный запуск через uv без глобальной установки
+# Вариант 2 — если пакет уже установлен через pip/uv install
+# mcpServers:
+#   1c-price:
+#     command: mcp-1c-price
+
+# Вариант 3 — локальный запуск через uv без глобальной установки
 # mcpServers:
 #   1c-price:
 #     command: uv

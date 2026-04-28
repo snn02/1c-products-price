@@ -2,35 +2,21 @@
 
 MCP-сервер работает через `stdio`-транспорт — одинаково во всех IDE. Разница только в формате конфиг-файла.
 
-Готовые шаблоны конфигов лежат в папке [`configs/`](../configs/).
-
 ---
 
 ## Claude Code
 
-Добавьте сервер в `.claude/settings.json` вашего проекта или в глобальный `~/.claude/settings.json`:
+Добавьте в `.claude/settings.json` вашего проекта или в глобальный `~/.claude/settings.json`:
 
 ```json
 {
   "mcpServers": {
     "1c-price": {
-      "command": "mcp-1c-price",
-      "env": {
-        "DB_PATH": "/абсолютный/путь/до/data/prices.db"
-      }
-    }
-  }
-}
-```
-
-Если сервер установлен локально из исходников:
-
-```json
-{
-  "mcpServers": {
-    "1c-price": {
-      "command": "uv",
-      "args": ["run", "--directory", "/путь/до/1c-products-price", "mcp-1c-price"]
+      "command": "uvx",
+      "args": [
+        "--from", "git+https://github.com/snn02/1c-products-price",
+        "mcp-1c-price"
+      ]
     }
   }
 }
@@ -44,7 +30,7 @@ MCP-сервер работает через `stdio`-транспорт — од
 
 ---
 
-## OpenCode (SST)
+## OpenCode
 
 Добавьте в `opencode.json` в корне проекта:
 
@@ -54,24 +40,11 @@ MCP-сервер работает через `stdio`-транспорт — од
   "mcp": {
     "1c-price": {
       "type": "local",
-      "command": ["mcp-1c-price"],
-      "env": {
-        "DB_PATH": "/абсолютный/путь/до/data/prices.db"
-      }
-    }
-  }
-}
-```
-
-Если установлен локально:
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "1c-price": {
-      "type": "local",
-      "command": ["uv", "run", "--directory", "/путь/до/1c-products-price", "mcp-1c-price"]
+      "command": [
+        "uvx",
+        "--from", "git+https://github.com/snn02/1c-products-price",
+        "mcp-1c-price"
+      ]
     }
   }
 }
@@ -86,35 +59,62 @@ MCP-сервер работает через `stdio`-транспорт — од
 ```yaml
 mcpServers:
   1c-price:
-    command: mcp-1c-price
-    env:
-      DB_PATH: /абсолютный/путь/до/data/prices.db
+    command: uvx
+    args:
+      - --from
+      - git+https://github.com/snn02/1c-products-price
+      - mcp-1c-price
 ```
 
-Если установлен локально:
+---
 
+## Если пакет установлен глобально
+
+Если вы установили пакет через `uv tool install` или `pip install`, используйте более короткий вариант без `uvx`:
+
+**Claude Code:**
+```json
+{
+  "mcpServers": {
+    "1c-price": {
+      "command": "mcp-1c-price"
+    }
+  }
+}
+```
+
+**OpenCode:**
+```json
+{
+  "mcp": {
+    "1c-price": {
+      "type": "local",
+      "command": ["mcp-1c-price"]
+    }
+  }
+}
+```
+
+**Codex:**
 ```yaml
 mcpServers:
   1c-price:
-    command: uv
-    args:
-      - run
-      - --directory
-      - /путь/до/1c-products-price
-      - mcp-1c-price
+    command: mcp-1c-price
 ```
 
 ---
 
 ## Переменные окружения
 
+Задаются через `.env` файл в рабочей директории или в секции `env` конфига IDE.
+
 | Переменная | По умолчанию | Описание |
 |-----------|-------------|----------|
 | `PRICE_URL` | `https://1c.ru/ftp/pub/pricelst/price_1c.zip` | URL прайс-листа |
-| `DB_PATH` | `data/prices.db` | Путь к базе данных |
+| `DB_PATH` | `~/.mcp-1c-price/prices.db` | Путь к базе данных |
 | `AUTO_UPDATE_DAYS` | `1` | Обновлять базу если прайс старше N дней |
 
-Переменные задаются через `.env` файл или в секции `env` конфига IDE.
+Менять `DB_PATH` нужно только если хотите хранить базу в нестандартном месте.
 
 ---
 
