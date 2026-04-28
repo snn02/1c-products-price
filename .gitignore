@@ -1,0 +1,20 @@
+# Runtime data
+data/prices.db
+data/*.zip
+data/*.xls
+
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.uv/
+
+# IDE
+.vscode/
+.idea/
